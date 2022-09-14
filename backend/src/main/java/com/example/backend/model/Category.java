@@ -4,5 +4,4 @@ public enum Category {
     COFFEE_BEAN_PACKAGE,
     MACAROON,
     SCONE,
-
 }
