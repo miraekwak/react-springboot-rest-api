@@ -1,6 +1,12 @@
 body {
   background: #ddd;
 }
+.buttonNav{
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  width: 80%;
+}
 
 .card {
   margin: auto;
