@@ -1,4 +1,4 @@
-package com.example.backend.controller.api;
+package com.example.backend.controller;
 
 import com.example.backend.model.OrderItem;
 

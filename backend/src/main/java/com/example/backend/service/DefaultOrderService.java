@@ -27,4 +27,9 @@ public class DefaultOrderService implements OrderService{
                 OrderStatus.ACCEPTED, LocalDateTime.now(), LocalDateTime.now());
         return orderRepository.insert(order);
     }
+
+    @Override
+    public List<Order> getOrderList() {
+        return orderRepository.findAll();
+    }
 }

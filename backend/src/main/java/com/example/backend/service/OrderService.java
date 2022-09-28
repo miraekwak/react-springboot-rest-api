@@ -10,4 +10,6 @@ public interface OrderService {
 
     Order createOrder(Email email, String address, String postcode, List<OrderItem> orderItems);
 
+    List<Order> getOrderList();
+
 }
