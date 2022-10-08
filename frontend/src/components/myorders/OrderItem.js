@@ -1,7 +1,6 @@
 import React from "react";
 
 export function OrderItem(props) {
-    const productId = props.productId;
     const category = props.category;
     const quantity = props.quantity;
     const price = props.price;

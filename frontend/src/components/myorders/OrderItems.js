@@ -6,7 +6,7 @@ export function OrderItems({orderItems=[]}) {
         <>
             <ul className="list-group products">
                 {orderItems.map(v =>
-                    <li key={v.productId} className="list-group-item d-flex mt-4">
+                    <li key={v.productId} className="list-group-item d-flex">
                         <OrderItem {...v} />
                     </li>
                 )}

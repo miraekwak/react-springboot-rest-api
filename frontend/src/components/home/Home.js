@@ -62,7 +62,7 @@ export function Home() {
                     <div className=" row justify-content-center">
                         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                             <Link to='/myOrders'><button type="button" className="btn btn-primary btn-sm">My Orders</button></Link>
-                            <button type="button" className="btn btn-secondary btn-sm">Small button</button>
+                            <Link to='/product'><button type="button" className="btn btn-secondary btn-sm">Product Manager</button></Link>
                         </div>
                     </div>
                 </div>
