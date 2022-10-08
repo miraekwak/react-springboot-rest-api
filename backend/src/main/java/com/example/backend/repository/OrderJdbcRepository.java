@@ -31,8 +31,6 @@ public class OrderJdbcRepository implements OrderRepository{
                     Collections.singletonMap("orderId", order.orderId()),
                     orderItemRowMapper
             );
-            System.out.println(orderItems.get(0).price());
-            System.out.println(orderItems.get(1).price());
             orderList.add(orderDtoToOrder(order, orderItems));
         });
         return orderList;
@@ -96,7 +94,7 @@ public class OrderJdbcRepository implements OrderRepository{
         try{
             var order = jdbcTemplate.queryForObject("SELECT * FROM orders WHERE order_status = :orderStatus",
                     Collections.singletonMap("orderStatus", orderStatus.toString()), orderDtoRowMapper);
-            var orderItems = jdbcTemplate.query("SELECT * FROM order_items ",
+            var orderItems = jdbcTemplate.query("SELECT * FROM order_items where order_id = UNHEX(REPLACE(:orderId, '-',''))",
                     Collections.singletonMap("orderId", order.orderId()),
                     orderItemRowMapper
             );
@@ -110,8 +108,8 @@ public class OrderJdbcRepository implements OrderRepository{
 
     @Override
     public void delete(UUID orderId) {
-        jdbcTemplate.update("DELETE FROM orders WHERE order_id = :orderId",
-                Collections.singletonMap("orderId", orderId));
+        jdbcTemplate.update("DELETE FROM orders WHERE order_id = UNHEX(REPLACE(:orderId, '-',''))",
+                Collections.singletonMap("orderId", orderId.toString()));
     }
 
 

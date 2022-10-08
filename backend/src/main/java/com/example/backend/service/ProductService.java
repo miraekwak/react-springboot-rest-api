@@ -4,6 +4,7 @@ import com.example.backend.model.Category;
 import com.example.backend.model.Product;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface ProductService {
 
@@ -14,4 +15,6 @@ public interface ProductService {
     Product createProduct(String productName, Category category, long price);
 
     Product createProduct(String productName, Category category, long price, String description);
+
+    UUID deleteProduct(UUID productId);
 }

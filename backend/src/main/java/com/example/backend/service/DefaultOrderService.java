@@ -32,4 +32,12 @@ public class DefaultOrderService implements OrderService{
     public List<Order> getOrderList() {
         return orderRepository.findAll();
     }
+
+    @Override
+    public UUID deleteOrder(UUID orderId) {
+        orderRepository.delete(orderId);
+        return orderId;
+    }
+
+
 }

@@ -48,4 +48,9 @@ public class DefaultProductService implements ProductService {
         );
         return productRepository.insert(product);
     }
+
+    @Override
+    public UUID deleteProduct(UUID productId) {
+        return productRepository.deleteProduct(productId);
+    }
 }
