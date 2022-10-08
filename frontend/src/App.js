@@ -1,20 +1,22 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import React, {useEffect, useState} from "react";
-import {ProductList} from "./components/ProductList";
-import {Summary} from "./components/Summary";
-import axios from "axios";
-import { BrowserRouter, Routes, Route, Switch } from "react-router-dom";
-import {Home} from "./components/Home";
-import {MyOrders} from "./components/MyOrders";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {Home} from "./components/home/Home";
+import {MyOrders} from "./components/myorders/MyOrders";
+import {ProductRegistration} from "./components/productManager/ProductRegistration";
+import {ProductManager} from "./components/productManager/ProductManager";
+
 
 
 function App() {
   return (
     <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="myOrders" element={<MyOrders/>}/>
+            <Route path="/home" element={<Home/>}/>
+            <Route path="/myOrders" element={<MyOrders/>}/>
+            <Route path="/product" element={<ProductManager/>}/>
+            <Route path="/product/new" element={<ProductRegistration/>}/>
         </Routes>
     </BrowserRouter>
   );

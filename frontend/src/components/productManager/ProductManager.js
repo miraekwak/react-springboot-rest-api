@@ -1,34 +1,28 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import React, {useEffect, useState} from "react";
-import {OrderList} from "./OrderList";
 import axios from "axios";
 import {Link} from "react-router-dom";
-import {ProductList} from "./ProductList";
 import {ProductManagerList} from "./ProductManagerList";
 
 
 export function ProductManager() {
     const [products, setProducts] = useState([]);
+    const [deleted, setDeleted] = useState(0);
 
     useEffect(() => {
         axios.get("http://localhost:8080/api/v1/products")
             .then(v => setProducts(v.data))
-    }, [])
+        setDeleted(0)
+    }, [deleted])
 
     const handleDeleteClicked = productId => {
-        axios.post('http://localhost:8080/api/v1/orders', {
-            email: order.email,
-            address: order.address,
-            postcode: order.postcode,
-            orderItems: items.map(v => ({
-                productId: v.productId,
-                category: v.category,
-                price: v.price,
-                quantity: v.count
-            }))
-        }).then(v => alert("주문이 정상적으로 접수되었습니다."),
+        axios.delete(`http://localhost:8080/api/v1/products/${productId}`)
+            .then(v => {
+                    alert("상품이 정상적으로 삭제되었습니다.")
+                    setDeleted(1)
+                },
             e => {
-                alert("서버 장애");
+                alert("주문을 취소해주세요.");
                 console.error(e);
             })
     }
@@ -43,7 +37,7 @@ export function ProductManager() {
                     <div className=" row justify-content-center">
                         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                             <Link to="/home"><button type="button" className="btn btn-primary btn-sm">Home</button></Link>
-                            <button type="button" className="btn btn-secondary btn-sm">Product List</button>
+                            <Link to="/myOrders"><button type="button" className="btn btn-secondary btn-sm">My Orders</button></Link>
                         </div>
                     </div>
                 </div>

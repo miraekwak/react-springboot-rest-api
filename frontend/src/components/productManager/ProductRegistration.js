@@ -31,7 +31,10 @@ export function ProductRegistration() {
             category: category,
             price: price
         })
-        .then(v => alert("상품이 정상적으로 등록되었습니다."),
+        .then(v => {
+                alert("상품이 정상적으로 등록되었습니다.")
+                window.location.href="http://localhost:3000/product";
+            },
             e => {
                 alert("서버 장애");
                 console.error(e);

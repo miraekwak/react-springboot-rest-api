@@ -1,4 +1,4 @@
-import '../App.css';
+import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import React, {useEffect, useState} from "react";
 import {ProductList} from "./ProductList";

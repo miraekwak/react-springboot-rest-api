@@ -5,8 +5,8 @@ export function Product(props) {
     const productName = props.productName;
     const category = props.category;
     const price = props.price;
-    const handleAddButtonClicked = e => {
-        props.onAddClick(productId);
+    const handleDeleteButtonClicked = e => {
+        props.onDeleteClick(productId);
     };
     return (
         <>
@@ -17,7 +17,7 @@ export function Product(props) {
             </div>
             <div className="col text-center price">{price}</div>
             <div className="col text-end action">
-                <button onClick={handleAddButtonClicked} className="btn btn-small btn-outline-dark">추가</button>
+                <button onClick={handleDeleteButtonClicked} className="btn btn-small btn-outline-dark">삭제</button>
             </div>
         </>
     )
