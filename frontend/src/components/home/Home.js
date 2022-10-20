@@ -8,11 +8,7 @@ import { Link } from "react-router-dom";
 
 
 export function Home() {
-    const [products, setProducts] = useState([
-        {productId: 'uuid-1', productName: '콜롬비아 커피 1', category: '커피빈', price: 5000},
-        {productId: 'uuid-2', productName: '콜롬비아 커피 2', category: '커피빈', price: 5000},
-        {productId: 'uuid-3', productName: '콜롬비아 커피 3', category: '커피빈', price: 5000}
-    ]);
+    const [products, setProducts] = useState([]);
 
     const [items, setItems] = useState([]);
 
@@ -62,7 +58,6 @@ export function Home() {
                     <div className=" row justify-content-center">
                         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                             <Link to='/myOrders'><button type="button" className="btn btn-primary btn-sm">My Orders</button></Link>
-                            <Link to='/product'><button type="button" className="btn btn-secondary btn-sm">Product Manager</button></Link>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {Link} from "react-router-dom";
 import {ProductManagerList} from "./ProductManagerList";
 
 
@@ -32,14 +31,6 @@ export function ProductManager() {
             <div className="container-fluid">
                 <div className="row justify-content-center m-4">
                     <h1 className="text-center">Future's Cafe</h1>
-                </div>
-                <div className="buttonNav">
-                    <div className=" row justify-content-center">
-                        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <Link to="/home"><button type="button" className="btn btn-primary btn-sm">Home</button></Link>
-                            <Link to="/myOrders"><button type="button" className="btn btn-secondary btn-sm">My Orders</button></Link>
-                        </div>
-                    </div>
                 </div>
                 <div className="card">
                     <div className="row d-md-flex justify-content-center">

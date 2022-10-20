@@ -8,9 +8,10 @@ import {Link} from "react-router-dom";
 export function MyOrders() {
     const [orders, setOrders] = useState()
     const [deleted, setDeleted] = useState(0)
+    const username = sessionStorage.getItem('username');
 
     useEffect(() => {
-        axios.get("http://localhost:8080/api/v1/orders")
+        axios.get(`http://localhost:8080/api/v1/orders/${username}`)
             .then(v => setOrders(v.data))
         setDeleted(0)
     }, [deleted])
@@ -37,8 +38,7 @@ export function MyOrders() {
                 <div className="buttonNav">
                     <div className=" row justify-content-center">
                         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <Link to="/home"><button type="button" className="btn btn-primary btn-sm">Home</button></Link>
-                            <Link to={"/product"}><button type="button" className="btn btn-secondary btn-sm">Product Manager</button></Link>
+                            <Link to="/"><button type="button" className="btn btn-primary btn-sm">Home</button></Link>
                         </div>
                     </div>
                 </div>
