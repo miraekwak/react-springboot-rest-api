@@ -50,8 +50,7 @@ export function ProductRegistration() {
                 <div className="buttonNav">
                     <div className=" row justify-content-center">
                         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <Link to="/home"><button type="button" className="btn btn-primary btn-sm">Home</button></Link>
-                            <button type="button" className="btn btn-secondary btn-sm">Product List</button>
+                            <Link to="/product"><button type="button" className="btn btn-primary btn-sm">상품 목록</button></Link>
                         </div>
                     </div>
                 </div>

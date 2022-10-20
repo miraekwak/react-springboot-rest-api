@@ -9,8 +9,8 @@ import { Link } from "react-router-dom";
 
 export function Home() {
     const [products, setProducts] = useState([]);
-
     const [items, setItems] = useState([]);
+    const memberId = sessionStorage.getItem('memberId');
 
     const handleAddClicked = productId => {
         const product = products.find(v => v.productId === productId);
@@ -31,6 +31,7 @@ export function Home() {
             alert("아이템을 추가해주세요!");
         } else {
             axios.post('http://localhost:8080/api/v1/orders', {
+                memberId: memberId,
                 email: order.email,
                 address: order.address,
                 postcode: order.postcode,
@@ -58,6 +59,7 @@ export function Home() {
                     <div className=" row justify-content-center">
                         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                             <Link to='/myOrders'><button type="button" className="btn btn-primary btn-sm">My Orders</button></Link>
+                            <Link to='/login'><button type="button" className="btn btn-secondary btn-sm">Logout</button></Link>
                         </div>
                     </div>
                 </div>

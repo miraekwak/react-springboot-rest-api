@@ -12,7 +12,9 @@ export function MyOrders() {
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/v1/orders/${username}`)
-            .then(v => setOrders(v.data))
+            .then(v => {
+                setOrders(v.data)
+            })
         setDeleted(0)
     }, [deleted])
 
@@ -39,6 +41,7 @@ export function MyOrders() {
                     <div className=" row justify-content-center">
                         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                             <Link to="/"><button type="button" className="btn btn-primary btn-sm">Home</button></Link>
+                            <Link to='/login'><button type="button" className="btn btn-secondary btn-sm">Logout</button></Link>
                         </div>
                     </div>
                 </div>

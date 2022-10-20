@@ -16,14 +16,15 @@ export function Login() {
         })
             .then(v => {
                     alert("로그인 되었습니다.");
+                    sessionStorage.setItem('memberId', v.data.memberId);
                     sessionStorage.setItem('username', v.data.username);
                     sessionStorage.setItem('name', v.data.name);
                     sessionStorage.setItem('role', v.data.role);
                     if(v.data.role === "USER") {
-                        window.location.href="http://localhost:3001/";
+                        window.location.href="http://localhost:3000/";
                     }
                     else {
-                        window.location.href="http://localhost:3001/product";
+                        window.location.href="http://localhost:3000/product";
                     }
                 },
                 e => {
