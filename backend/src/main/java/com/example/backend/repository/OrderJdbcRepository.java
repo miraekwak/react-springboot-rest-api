@@ -116,6 +116,7 @@ public class OrderJdbcRepository implements OrderRepository{
     private Map<String, Object> toOrderParamMap(Order order) {
         var paramMap = new HashMap<String, Object>();
         paramMap.put("orderId", order.getOrderId().toString().getBytes());
+        paramMap.put("memberId", order.getMemberId().toString().getBytes());
         paramMap.put("email", order.getEmail().getAddress());
         paramMap.put("address", order.getAddress());
         paramMap.put("postcode", order.getPostcode());
@@ -139,17 +140,19 @@ public class OrderJdbcRepository implements OrderRepository{
 
     private static final RowMapper<OrderDto> orderDtoRowMapper = (resultSet, i) -> {
         var orderId = toUUID(resultSet.getBytes("order_id"));
+        var memberId = toUUID(resultSet.getBytes("member_id"));
         var email = new Email(resultSet.getString("email"));
         var address = resultSet.getString("address");
         var postcode = resultSet.getString("postcode");
         var orderStatus = OrderStatus.valueOf(resultSet.getString("order_status"));
         var createdAt = toLocalDateTime(resultSet.getTimestamp("created_at"));
         var updatedAt = toLocalDateTime(resultSet.getTimestamp("updated_at"));
-        return new OrderDto(orderId, email, address, postcode, orderStatus, createdAt, updatedAt);
+        return new OrderDto(orderId, memberId, email, address, postcode, orderStatus, createdAt, updatedAt);
     };
 
     private static final RowMapper<Order> orderRowMapper = (resultSet, i) -> {
         var orderId = toUUID(resultSet.getBytes("order_id"));
+        var memberId = toUUID(resultSet.getBytes("member_id"));
         var email = new Email(resultSet.getString("email"));
         var address = resultSet.getString("address");
         var postcode = resultSet.getString("postcode");
@@ -157,7 +160,7 @@ public class OrderJdbcRepository implements OrderRepository{
         var orderStatus = OrderStatus.valueOf(resultSet.getString("order_status"));
         var createdAt = toLocalDateTime(resultSet.getTimestamp("created_at"));
         var updatedAt = toLocalDateTime(resultSet.getTimestamp("updated_at"));
-        return new Order(orderId, email, address, postcode, orderitems, orderStatus, createdAt, updatedAt);
+        return new Order(orderId, memberId, email, address, postcode, orderitems, orderStatus, createdAt, updatedAt);
     };
 
     private static final RowMapper<OrderItem> orderItemRowMapper = (resultSet, i) -> {
@@ -170,6 +173,7 @@ public class OrderJdbcRepository implements OrderRepository{
 
     Order orderDtoToOrder(OrderDto orderDto, List<OrderItem> orderItems){
         var orderId = orderDto.orderId();
+        var memberId = orderDto.memberId();
         var email = orderDto.email();
         var address = orderDto.address();
         var postcode = orderDto.postcode();
@@ -177,6 +181,6 @@ public class OrderJdbcRepository implements OrderRepository{
         var orderStatus = orderDto.orderStatus();
         var createdAt = orderDto.createdAt();
         var updatedAt = orderDto.updatedAt();
-        return new Order(orderId, email, address, postcode, orderitems, orderStatus, createdAt, updatedAt);
+        return new Order(orderId, memberId, email, address, postcode, orderitems, orderStatus, createdAt, updatedAt);
     }
 }

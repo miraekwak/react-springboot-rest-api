@@ -6,6 +6,7 @@ import java.util.UUID;
 
 public class Order {
     private final UUID orderId;
+    private final UUID memberId;
     private final Email email;
     private String address;
     private String postcode;
@@ -14,8 +15,9 @@ public class Order {
     private final LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public Order(UUID orderId, Email email, String address, String postcode, List<OrderItem> orderItems, OrderStatus orderStatus, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Order(UUID orderId, UUID memberId, Email email, String address, String postcode, List<OrderItem> orderItems, OrderStatus orderStatus, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.orderId = orderId;
+        this.memberId = memberId;
         this.email = email;
         this.address = address;
         this.postcode = postcode;
@@ -27,6 +29,10 @@ public class Order {
 
     public UUID getOrderId() {
         return orderId;
+    }
+
+    public UUID getMemberId() {
+        return memberId;
     }
 
     public Email getEmail() {

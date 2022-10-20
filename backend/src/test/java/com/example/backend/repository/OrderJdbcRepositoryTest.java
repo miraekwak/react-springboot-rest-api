@@ -3,7 +3,6 @@ package com.example.backend.repository;
 import com.example.backend.model.*;
 import com.wix.mysql.EmbeddedMysql;
 import com.wix.mysql.config.Charset;
-import org.hamcrest.beans.SamePropertyValuesAs;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,6 @@ import static com.wix.mysql.distribution.Version.v5_7_10;
 import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 
@@ -57,6 +55,7 @@ class OrderJdbcRepositoryTest {
 
     private static Product product1 = new Product(UUID.randomUUID(), "product1", Category.MACAROON, 1000);
     private static Product product2 = new Product(UUID.randomUUID(), "product2", Category.COFFEE_BEAN_PACKAGE, 2000);
+    private static Member member = new Member(UUID.randomUUID(), "test-user",Role.USER, "test", "test");
 
     @Test
     void insertData() {
@@ -74,7 +73,7 @@ class OrderJdbcRepositoryTest {
         List<OrderItem> orderItemList = new ArrayList<>();
         orderItemList.add(orderItem1);
         orderItemList.add(orderItem2);
-        Order order = new Order(UUID.randomUUID(), new Email("alfo9490@naver.com"), "daejeon", "1234", orderItemList, OrderStatus.ACCEPTED, LocalDateTime.now().truncatedTo(ChronoUnit.MILLIS), LocalDateTime.now().truncatedTo(ChronoUnit.MILLIS));
+        Order order = new Order(UUID.randomUUID(), member.getMemberId(), new Email("alfo9490@naver.com"), "daejeon", "1234", orderItemList, OrderStatus.ACCEPTED, LocalDateTime.now().truncatedTo(ChronoUnit.MILLIS), LocalDateTime.now().truncatedTo(ChronoUnit.MILLIS));
         orderRepository.insert(order);
 
         assertThat(order.getOrderItems().get(0).productId(), samePropertyValuesAs(orderItem1.productId()));

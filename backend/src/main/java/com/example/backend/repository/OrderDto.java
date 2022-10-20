@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record OrderDto(
-        UUID orderId, Email email, String address, String postcode,
+        UUID orderId, UUID memberId, Email email, String address, String postcode,
         OrderStatus orderStatus,
         LocalDateTime createdAt,
         LocalDateTime updatedAt

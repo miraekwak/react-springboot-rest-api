@@ -3,8 +3,9 @@ package com.example.backend.controller;
 import com.example.backend.model.OrderItem;
 
 import java.util.List;
+import java.util.UUID;
 
 public record CreateOrderRequest(
-        String email, String address, String postcode, List<OrderItem> orderItems
+        UUID memberId, String email, String address, String postcode, List<OrderItem> orderItems
 ) {
 }

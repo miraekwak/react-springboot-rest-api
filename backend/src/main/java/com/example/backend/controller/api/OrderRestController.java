@@ -22,6 +22,7 @@ public class OrderRestController {
     @PostMapping("/api/v1/orders")
     public Order createOrder(@RequestBody CreateOrderRequest createOrderRequest) {
         return orderService.createOrder(
+                createOrderRequest.memberId(),
                 new Email(createOrderRequest.email()),
                 createOrderRequest.address(),
                 createOrderRequest.postcode(),

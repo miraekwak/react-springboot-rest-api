@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface OrderService {
 
-    Order createOrder(Email email, String address, String postcode, List<OrderItem> orderItems);
+    Order createOrder(UUID memberId, Email email, String address, String postcode, List<OrderItem> orderItems);
 
     List<Order> getOrderList();
 
