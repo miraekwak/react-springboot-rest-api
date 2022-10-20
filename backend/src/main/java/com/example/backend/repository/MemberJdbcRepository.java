@@ -61,6 +61,19 @@ public class MemberJdbcRepository implements MemberRepository {
         }
     }
 
+    @Override
+    public Optional<Member> findByUsername(String username) {
+        try{
+            var member = jdbcTemplate.queryForObject("SELECT * FROM member WHERE username = :username",
+                    Collections.singletonMap("username", username), memberDtoRowMapper);
+            return Optional.of(
+                    memberDtoToMember(member)
+            );
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
+    }
+
     private Member memberDtoToMember(MemberDto member) {
         return new Member(member.memberId(), member.name(), member.role(), member.username(), member.passwd());
     }

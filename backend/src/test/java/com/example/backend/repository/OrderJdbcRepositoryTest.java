@@ -87,7 +87,7 @@ class OrderJdbcRepositoryTest {
         var order = orderRepository.findById(orderId);
 
         // then
-        var orderList = orderRepository.findAll();
+        var orderList = orderRepository.findAllByMemberId(member.getMemberId());
         assertThat(orderList.get(0).getEmail(), samePropertyValuesAs(order.get().getEmail()));
         System.out.println(orderList.get(0).getEmail());
         assertThat(orderList.get(0).getOrderItems().get(0).productId(), samePropertyValuesAs(order.get().getOrderItems().get(0).productId()));

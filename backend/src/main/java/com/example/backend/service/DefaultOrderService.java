@@ -1,23 +1,24 @@
 package com.example.backend.service;
 
-import com.example.backend.model.Email;
-import com.example.backend.model.Order;
-import com.example.backend.model.OrderItem;
-import com.example.backend.model.OrderStatus;
+import com.example.backend.model.*;
+import com.example.backend.repository.MemberRepository;
 import com.example.backend.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class DefaultOrderService implements OrderService{
 
     private final OrderRepository orderRepository;
+    private final MemberRepository memberRepository;
 
-    public DefaultOrderService(OrderRepository orderRepository) {
+    public DefaultOrderService(OrderRepository orderRepository, MemberRepository memberRepository) {
         this.orderRepository = orderRepository;
+        this.memberRepository = memberRepository;
     }
 
     @Override
@@ -29,8 +30,9 @@ public class DefaultOrderService implements OrderService{
     }
 
     @Override
-    public List<Order> getOrderList() {
-        return orderRepository.findAll();
+    public List<Order> getOrderList(String username) {
+        var member = memberRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("존재하지 않는 사용자입니다."));
+        return orderRepository.findAllByMemberId(member.getMemberId());
     }
 
     @Override

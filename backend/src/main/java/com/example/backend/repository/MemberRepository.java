@@ -9,4 +9,7 @@ public interface MemberRepository {
     Member save(Member member);
 
     Optional<Member> findByUsernameAndPasswd(String username, String passwd);
+
+    Optional<Member> findByUsername(String username);
+
 }

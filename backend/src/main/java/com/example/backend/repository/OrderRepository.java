@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface OrderRepository {
 
-    List<Order> findAll();
+    List<Order> findAllByMemberId(UUID memberId);
 
     Order insert(Order order);
 

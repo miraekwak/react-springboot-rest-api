@@ -11,7 +11,7 @@ public interface OrderService {
 
     Order createOrder(UUID memberId, Email email, String address, String postcode, List<OrderItem> orderItems);
 
-    List<Order> getOrderList();
+    List<Order> getOrderList(String username);
 
     UUID deleteOrder(UUID orderId);
 

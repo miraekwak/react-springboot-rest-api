@@ -23,12 +23,12 @@ public class OrderJdbcRepository implements OrderRepository{
     }
 
     @Override
-    public List<Order> findAll() {
-        var orders = jdbcTemplate.query("SELECT * FROM orders", orderDtoRowMapper);
+    public List<Order> findAllByMemberId(UUID memberId) {
+        var orders = jdbcTemplate.query("SELECT * FROM orders where member_id = UNHEX(REPLACE(:memberId, '-',''))", Collections.singletonMap("memberId", memberId.toString()), orderDtoRowMapper);
         var orderList = new ArrayList<Order>();
         orders.forEach(order -> {
-            var orderItems = jdbcTemplate.query("SELECT * FROM order_items ",
-                    Collections.singletonMap("orderId", order.orderId()),
+            var orderItems = jdbcTemplate.query("SELECT * FROM order_items where order_id = UNHEX(REPLACE(:orderId, '-',''))",
+                    Collections.singletonMap("orderId", order.orderId().toString()),
                     orderItemRowMapper
             );
             orderList.add(orderDtoToOrder(order, orderItems));
@@ -39,8 +39,8 @@ public class OrderJdbcRepository implements OrderRepository{
     @Override
     @Transactional
     public Order insert(Order order) {
-        jdbcTemplate.update("INSERT INTO orders(order_id, email, address, postcode, order_status, created_at, updated_at)" +
-                        "VALUES(UNHEX(REPLACE(:orderId, '-','')), :email, :address, :postcode, :orderStatus, :createdAt, :updatedAt)",
+        jdbcTemplate.update("INSERT INTO orders(order_id, member_id, email, address, postcode, order_status, created_at, updated_at)" +
+                        "VALUES(UNHEX(REPLACE(:orderId, '-','')), UNHEX(REPLACE(:memberId, '-','')), :email, :address, :postcode, :orderStatus, :createdAt, :updatedAt)",
                 toOrderParamMap(order));
         order.getOrderItems()
                 .forEach(item ->

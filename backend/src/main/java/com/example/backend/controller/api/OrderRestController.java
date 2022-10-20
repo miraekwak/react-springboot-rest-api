@@ -30,9 +30,9 @@ public class OrderRestController {
         );
     }
 
-    @GetMapping("/api/v1/orders")
-    public List<Order> getOrderList(){
-        return orderService.getOrderList();
+    @GetMapping("/api/v1/orders/{username}")
+    public List<Order> getOrderList(@PathVariable String username){
+        return orderService.getOrderList(username);
     }
 
     @DeleteMapping("/api/v1/orders/{orderId}")
