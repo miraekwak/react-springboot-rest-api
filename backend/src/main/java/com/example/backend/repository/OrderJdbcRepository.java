@@ -24,7 +24,8 @@ public class OrderJdbcRepository implements OrderRepository{
 
     @Override
     public List<Order> findAllByMemberId(UUID memberId) {
-        var orders = jdbcTemplate.query("SELECT * FROM orders where member_id = UNHEX(REPLACE(:memberId, '-',''))", Collections.singletonMap("memberId", memberId.toString()), orderDtoRowMapper);
+        var orders = jdbcTemplate.query("SELECT * FROM orders where member_id = UNHEX(REPLACE(:memberId, '-',''))",
+                Collections.singletonMap("memberId", memberId.toString()), orderDtoRowMapper);
         var orderList = new ArrayList<Order>();
         orders.forEach(order -> {
             var orderItems = jdbcTemplate.query("SELECT * FROM order_items where order_id = UNHEX(REPLACE(:orderId, '-',''))",
@@ -60,7 +61,7 @@ public class OrderJdbcRepository implements OrderRepository{
         try{
             var order = jdbcTemplate.queryForObject("SELECT * FROM orders WHERE order_id = UNHEX(REPLACE(:orderId, '-',''))",
                     Collections.singletonMap("orderId", orderId.toString()), orderDtoRowMapper);
-            var orderItems = jdbcTemplate.query("SELECT * FROM order_items ",
+            var orderItems = jdbcTemplate.query("SELECT * FROM order_items WHERE order_id = UNHEX(REPLACE(:orderId, '-',''))",
                     Collections.singletonMap("orderId", order.orderId()),
                     orderItemRowMapper
             );
@@ -171,16 +172,16 @@ public class OrderJdbcRepository implements OrderRepository{
         return new OrderItem(productId, category, price, quantity);
     };
 
-    Order orderDtoToOrder(OrderDto orderDto, List<OrderItem> orderItems){
+    Order orderDtoToOrder(OrderDto orderDto, List<OrderItem> orderitems){
         var orderId = orderDto.orderId();
         var memberId = orderDto.memberId();
         var email = orderDto.email();
         var address = orderDto.address();
         var postcode = orderDto.postcode();
-        var orderitems = orderItems;
+        var orderItems = orderitems;
         var orderStatus = orderDto.orderStatus();
         var createdAt = orderDto.createdAt();
         var updatedAt = orderDto.updatedAt();
-        return new Order(orderId, memberId, email, address, postcode, orderitems, orderStatus, createdAt, updatedAt);
+        return new Order(orderId, memberId, email, address, postcode, orderItems, orderStatus, createdAt, updatedAt);
     }
 }
